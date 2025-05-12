@@ -1,62 +1,61 @@
 ![Image](./files/quickstart/pyhrv.png)
-# Overview & Quickstart
+# 概要 & クイックスタート
 
-## Table of Contents
-* [0. Getting Started](#start)
-  * [0.1 Install pyHRV](#install)
-  * [0.2 Sample Data](#samples)
-  * [0.3 pyHRV Output Format](#output)
-* [1. pyHRV Structure](#structure)
-* [2. Tools Module](#tools)
-  * [2.1 Overview](#tools_overview)
-  * [2.2 Quickstart](#tools_quick)
-    * [2.2.1 Load ECG, Compute NNI and ∆NNI Series](#tools_quick_start)
-    * [2.2.2 Plot ECG Signals](#tools_plot_ecg)
-    * [2.2.3 Plot Tachogram](#tools_tachogram)
-    * [2.2.4 HRV File Management and HRV report](#tools_filem)
-* [3. Time Domain Module](#time)
-  * [3.1 Overview](#time_overview)
-  * [3.2 Quickstart](#time_quick)
-    * [3.2.1 Compute Individual Time Domain Parameters](#time_quick_parameter)
-    * [3.2.2 Compute All Time Domain Parameters at Once](#time_quick_module)
-* [4. Frequency Domain Module](#freq)
-  * [4.1 Overview](#freq_overview)
-  * [4.2 Quickstart](#freq_quick)
-    * [4.2.1 Welch's Method](#freq_welch)
-    * [4.2.2 Lomb-Scargle Periodogram](#freq_welch)
-    * [4.2.3 Autoregressive Method](#freq_ar)
-    * [4.2.4 Compute All PSD Methods at Once](#freq_quick_module)
-* [5. Nonlinear Module](#nonlinear)
-  * [5.1 Overview](#nonlinear_overview)
-  * [5.2 Quickstart](#nonlinear_quick)
-    * [5.2.1 Compute Individual Nonlinear Parameters](#nonlinear_quick_parameter)
-    * [5.2.2 Compute All Nonlinear Parameters at Once](#nonlinear_quick_module)
+## 目次
+* [0. はじめに](#start)
+  * [0.1 pyHRVのインストール](#install)
+  * [0.2 サンプルデータ](#samples)
+  * [0.3 pyHRV出力形式](#output)
+* [1. pyHRV構造](#structure)
+* [2. ツールモジュール](#tools)
+  * [2.1 概要](#tools_overview)
+  * [2.2 クイックスタート](#tools_quick)
+    * [2.2.1 ECGの読み込み、NNIと∆NNI系列の計算](#tools_quick_start)
+    * [2.2.2 ECG信号のプロット](#tools_plot_ecg)
+    * [2.2.3 タコグラムのプロット](#tools_tachogram)
+    * [2.2.4 HRVファイル管理とHRVレポート](#tools_filem)
+* [3. 時間領域モジュール](#time)
+  * [3.1 概要](#time_overview)
+  * [3.2 クイックスタート](#time_quick)
+    * [3.2.1 個別の時間領域パラメータの計算](#time_quick_parameter)
+    * [3.2.2 すべての時間領域パラメータを一度に計算](#time_quick_module)
+* [4. 周波数領域モジュール](#freq)
+  * [4.1 概要](#freq_overview)
+  * [4.2 クイックスタート](#freq_quick)
+    * [4.2.1 ウェルチ法](#freq_welch)
+    * [4.2.2 ロンブ-スカーグル周期図](#freq_welch)
+    * [4.2.3 自己回帰法](#freq_ar)
+    * [4.2.4 すべてのPSD手法を一度に計算](#freq_quick_module)
+* [5. 非線形モジュール](#nonlinear)
+  * [5.1 概要](#nonlinear_overview)
+  * [5.2 クイックスタート](#nonlinear_quick)
+    * [5.2.1 個別の非線形パラメータの計算](#nonlinear_quick_parameter)
+    * [5.2.2 すべての非線形パラメータを一度に計算](#nonlinear_quick_module)
 
 
-##### List of Acronyms
-(sorted by order of appearance)
+##### 略語リスト
+(登場順)
 
-* NNI 	Normal-to-Normal Interval (between succesive R-peaks)
-* ∆NNI	Difference between successive NNI
-* HR    Heart Rate
-* PSD 	Power Spectral Density
-* FFT 	Fast Fourier Transform
-* ULF		Ultra Low Frequency
-* VLF		Very Low Frequency
-* LF		Low Frequency
-* HF 		High Frequency
-* DFA Detrended Flucutation Analysis
+* NNI 	正常-正常間隔（連続するR波ピーク間）
+* ∆NNI	連続するNNI間の差
+* HR    心拍数
+* PSD 	パワースペクトル密度
+* FFT 	高速フーリエ変換
+* ULF		超低周波
+* VLF		超低周波
+* LF		低周波
+* HF 		高周波
+* DFA 傾向変動解析
 
-# 0. Getting Started <a name="start"></a>
-## 0.1 Install pyHRV <a name="install"></a>
-Open your terminal and install `pyhrv` using the pip tool with the following command:
+# 0. はじめに <a name="start"></a>
+## 0.1 pyHRVのインストール <a name="install"></a>
+ターミナルを開き、以下のコマンドでpipツールを使用して`pyhrv`をインストールします：
 
 ```python
 pip install pyhrv
 ```
 
-The current pyHRV has been primarily developed for the Python 2.7 programming language. Running the pip command above may cause
-errors when trying to install the package using Python 3. In this case, try to install the pyHRV dependencies first:
+現在のpyHRVは主にPython 2.7プログラミング言語用に開発されています。Python 3を使用して上記のpipコマンドを実行すると、パッケージのインストール時にエラーが発生する可能性があります。この場合、まずpyHRVの依存関係をインストールしてみてください：
 
 ```python
 pip install biosppy
@@ -68,476 +67,473 @@ pip install spectrum
 pip install pyhrv
 ```
 
-## 0.2 Sample Data <a name="samples"></a>
-This package comes with ECG and NNI sample data which can be found in the `samples` folder found on the pyHRV GitHub page. 
+## 0.2 サンプルデータ <a name="samples"></a>
+このパッケージにはpyHRV GitHubページの`samples`フォルダにあるECGとNNIのサンプルデータが付属しています。
 
-The `SampleECG.txt` file contains the offical [BITalino Sample ECG signal](https://github.com/BITalinoWorld/revolution-sample-data/tree/master/ECG) acquired with a [BITalino revolution](http://bitalino.com/en/) device and the [OpenSignals revolution](http://bitalino.com/en/software) software. The examples below use the [OpenSignalsReader](https://github.com/PGomes92/opensignalsreader) to read the ECG data from the `SampleECG.txt` file, however, any other ECG sensor works as well.
+`SampleECG.txt`ファイルには、[BITalino revolution](http://bitalino.com/en/)デバイスと[OpenSignals revolution](http://bitalino.com/en/software)ソフトウェアで取得した公式[BITalino サンプルECG信号](https://github.com/BITalinoWorld/revolution-sample-data/tree/master/ECG)が含まれています。以下の例では[OpenSignalsReader](https://github.com/PGomes92/opensignalsreader)を使用して`SampleECG.txt`ファイルからECGデータを読み込みますが、他のECGセンサーでも同様に動作します。
 
-The NNI series stored in the `series_X` files (.npy or .txt) are segments of 5min in duration extracted from the [MIT-BIH NSRDB Database (physionet.org)](https://physionet.org/physiobank/database/nsrdb/).
+`series_X`ファイル（.npyまたは.txt）に保存されているNNI系列は、[MIT-BIH NSRDBデータベース（physionet.org）](https://physionet.org/physiobank/database/nsrdb/)から抽出された5分間のセグメントです。
 
-## 0.3 pyHRV Output Format <a name="output"></a>
-The toolbox's parameter functions return all computed HRV parameters in a single `biosppy.utils.ReturnTuple`[(more here,](https://biosppy.readthedocs.io/en/stable/biosppy.html#biosppy.utils.ReturnTuple) and [here](https://biosppy.readthedocs.io/en/stable/tutorial.html#a-note-on-return-objects) object. These objects are a mix of Python tuples (immutable) which are indexed using _keys_ as used in Python dictionaries.
+## 0.3 pyHRV出力形式 <a name="output"></a>
+ツールボックスのパラメータ関数は、計算されたすべてのHRVパラメータを単一の`biosppy.utils.ReturnTuple`[(詳細はこちら,](https://biosppy.readthedocs.io/en/stable/biosppy.html#biosppy.utils.ReturnTuple) および [こちら)](https://biosppy.readthedocs.io/en/stable/tutorial.html#a-note-on-return-objects)オブジェクトで返します。これらのオブジェクトは、Pythonの辞書で使用されるように_キー_を使用してインデックス付けされるPythonタプル（不変）の混合です。
 
-Please refer to the [hrv_keys.json](./files/hrv_keys.json) file found in the [files](./files/) folder to access the full list of available parameter keys.
+利用可能なパラメータキーの完全なリストにアクセスするには、[files](./files/)フォルダにある[hrv_keys.json](./files/hrv_keys.json)ファイルを参照してください。
 
-# 1. pyHRV Structure <a name="structure"></a>
-The HRV feature extraction functions of the pyHRV toolbox have been implemented and categorized into three levels, which are intended to facilitate the usage and increase the usability of the toolbox according to the needs of the user or programming background. This multilevel-architecture is illustrated in the Figure below.
+# 1. pyHRV構造 <a name="structure"></a>
+pyHRVツールボックスのHRV特徴抽出機能は、ユーザーのニーズやプログラミングの背景に応じて、ツールボックスの使用を容易にし、使いやすさを向上させることを目的とした3つのレベルに分類されて実装されています。この多層アーキテクチャは以下の図に示されています。
 
 ![Image](./files/quickstart/function_levels.png)
 
-**Level 1 - HRV Level:**
+**レベル1 - HRVレベル：**
 
-This level consists of a single function that allows you to compute the full range of HRV parameters using only a single line of code by calling the `hrv()` function found in the `hrv.py`. This function calls all underlying HRV parameter functions and returns the bundled results in a `biosppy.utils.ReturnTuple()` object. Custom settings or parameters for the computation of specific parameters can be passed to the hrv() function if needed using the `kwargs` input dictionaries. Otherwise, the default values will be used.
+このレベルは、`hrv.py`にある`hrv()`関数を呼び出すことで、1行のコードだけですべてのHRVパラメータを計算できる単一の関数で構成されています。この関数は、すべての基礎となるHRVパラメータ関数を呼び出し、バンドルされた結果を`biosppy.utils.ReturnTuple()`オブジェクトで返します。特定のパラメータの計算のためのカスタム設定やパラメータは、必要に応じて`kwargs`入力辞書を使用してhrv()関数に渡すことができます。それ以外の場合は、デフォルト値が使用されます。
 
-**Level 2 - Domain Level:**
+**レベル2 - ドメインレベル：**
 
-This level of module/domain functions intended for users that want to compute all the parameters of a specific domain. Using the example of the Time Domain, the `time domain()` function calls all the parameter function of this domain and returns the results bundled in a `biosppy.utils.ReturnTuple()` object. As in the previous level, user-specific settings and parameters can be passed to the domain functions using the available `kwargs` dictionaries. The module level function can be found in the respective domain modules.
+このレベルのモジュール/ドメイン関数は、特定のドメインのすべてのパラメータを計算したいユーザー向けです。時間領域の例を使用すると、`time domain()`関数はこのドメインのすべてのパラメータ関数を呼び出し、結果を`biosppy.utils.ReturnTuple()`オブジェクトにバンドルして返します。前のレベルと同様に、ユーザー固有の設定とパラメータは、利用可能な`kwargs`辞書を使用してドメイン関数に渡すことができます。モジュールレベルの関数は、それぞれのドメインモジュールにあります。
 
-**Level 3 - Parameter Level:**
+**レベル3 - パラメータレベル：**
 
-This level parameter-specific functions for the case that only want to compute single, specific parameters
-(individually) (e.g. `sdnn()` returns the SDNN parameter). This allows you to select only the parameters or features
-required for your specific application. User-specific settings and parameters can be made directly when overloading
-the function.
+このレベルは、単一の特定のパラメータ（個別に）を計算したい場合のパラメータ固有の関数です（例：`sdnn()`はSDNNパラメータを返します）。これにより、特定のアプリケーションに必要なパラメータや機能のみを選択できます。ユーザー固有の設定とパラメータは、関数をオーバーロードするときに直接行うことができます。
 
-# 2. Tools Module <a name="tools"></a>
-## 2.1 Overview <a name="tools_overview"></a>
-The tools module contains a selection of functions to compute fundamental data series for HRV computation and other useful features (e.g., ECG signal plotting, HRV parameter exportation). A full list of the available functions is listed in the table below.
+# 2. ツールモジュール <a name="tools"></a>
+## 2.1 概要 <a name="tools_overview"></a>
+ツールモジュールには、HRV計算のための基本的なデータ系列を計算するための関数と、その他の有用な機能（例：ECG信号プロット、HRVパラメータのエクスポート）が含まれています。利用可能な関数の完全なリストは以下の表に記載されています。
 
-| Function   		      | Description                                               								|
+| 関数   		      | 説明                                               								|
 | ---                 | ---                                                       								|
-| `nn_intervals()`    | Computes NNI from a series of R-peak locations                    |
-| `nn_diff()`        	| Computes ∆NNI from a series of NNI or R-peak locations    								|
-| `nn_format()`			  | Confirms NumPy and converts NNI series in s-format to ms 									|
-| `heart_rate()`     	| Computes HR data from individual NNI or R-peak locations  								|
-| `tachogram()`      	| Plots NNI and HR Tachogram                                								|
-| `ecg_plot()`        | Plots ECG signal on medical-grade-like ECG 												|
-| `segmentation()` 		| Segments NNI series into segments of specified duration									|
-| `hrv_export()` 		  | Exports HRV results to a .JSON file 														|
-| `hrv_import()` 		  | Imports HRV results stored in a .JSON file 												|
-| `hrv_report()`    	| Generates HRV report in .TXT or .CSV format 												|
-| `join_tuples()` 		| Joins multiple `biosppy.utils.ReturnTuple` objects into 1 object 							|
-| `time_vector()`		  | Computes the time vector for a given signal 												|
-| `std()`				      | Computes standard deviation of a data series 												|
-| `check_input()`    | Verifies input data for (almost) all parameter funtions 									|
-| `check_interval()`	| Verifies interal limits (e.g. fixes max(limit) < min(limit))								|
+| `nn_intervals()`    | R波ピーク位置のシリーズからNNIを計算                    |
+| `nn_diff()`        	| NNIシリーズまたはR波ピーク位置から∆NNIを計算    								|
+| `nn_format()`			  | NumPy配列を確認し、秒単位のNNIシリーズをミリ秒に変換 									|
+| `heart_rate()`     	| 個々のNNIまたはR波ピーク位置からHRデータを計算  								|
+| `tachogram()`      	| NNIとHRのタコグラムをプロット                                								|
+| `ecg_plot()`        | 医療グレードのようなECG上でECG信号をプロット 												|
+| `segmentation()` 		| NNIシリーズを指定された期間のセグメントに分割									|
+| `hrv_export()` 		  | HRV結果を.JSONファイルにエクスポート 														|
+| `hrv_import()` 		  | .JSONファイルに保存されたHRV結果をインポート 												|
+| `hrv_report()` 	  	| .TXTまたは.CSV形式でHRVレポートを生成 												|
+| `join_tuples()` 		| 複数の`biosppy.utils.ReturnTuple`オブジェクトを1つのオブジェクトに結合 							|
+| `time_vector()`		  | 特定の信号の時間ベクトルを計算 												|
+| `std()`				      | データシリーズの標準偏差を計算 												|
+| `check_input()`    | （ほぼ）すべてのパラメータ関数の入力データを検証 									|
+| `check_interval()`	| 間隔の制限を検証（例：max(limit) < min(limit)を修正）								|
 
-(weak module functions are not listed in this table)
+（弱いモジュール関数はこの表に記載されていません）
 
-## 2.2. Quickstart <a name="tools_quick"></a>
-In order to use this module, it is recommended to import it as follows:
+## 2.2. クイックスタート <a name="tools_quick"></a>
+このモジュールを使用するには、以下のようにインポートすることをお勧めします：
 ```python
 import pyhrv.tools as tools
 ```
 
-### 2.2.1 Load ECG, Extract R-peaks and Compute NNI <a name="tools_quick_stat"></a>
-The example below demonstrates how to load an ECG signal (here the [BITalino](www.bitalino.com) sample ECG signal), extract the R-peak locations and compute the NNI series.
+### 2.2.1 ECGの読み込み、R波の抽出、NNIの計算 <a name="tools_quick_stat"></a>
+以下の例では、ECG信号（ここでは[BITalino](www.bitalino.com)サンプルECG信号）を読み込み、R波ピーク位置を抽出し、NNIシリーズを計算する方法を示しています。
 ```python
 import biosppy
 import numpy as np
 import pyhrv.tools as tools
 from opensignalsreader import OpenSignalsReader 
 
-# Load sample ECG signal & extract R-peaks using BioSppy
+# サンプルECG信号を読み込み、BioSppyを使用してR波を抽出
 signal = OpenSignalsReader('./samples/SampleECG.txt').signal('ECG')
 signal, rpeaks = biosppy.signals.ecg.ecg(signal, show=False)[1:3]
 
-# Compute NNI
+# NNIを計算
 nni = tools.nn_intervals(rpeaks)
 
 ```
 
-### 2.2.2 Plot ECG Signals <a name="tools_plot_ecg"></a>
-The `plot_ecg()` function plots ECG data on medical-grade-like ECG paper layout. 
+### 2.2.2 ECG信号のプロット <a name="tools_plot_ecg"></a>
+`plot_ecg()`関数は、医療グレードのようなECGペーパーレイアウトでECGデータをプロットします。
 ```python
-# Plot the ECG signal (interval: 0s to 15s)
+# ECG信号をプロット（間隔：0秒から15秒）
 tools.plot_ecg(signal, interval=[0, 15])
 ```
-The resulting output should look like this:
+結果の出力は次のようになります：
 ![Image](./files/quickstart/ecg15.png)
 
-### 2.2.3 Plot Tachogram <a name="tools_tachogram"></a>
-The `tachogram()` function plots the Tachogram where the NNI data and HR data are plotted against their temporal occurence.
+### 2.2.3 タコグラムのプロット <a name="tools_tachogram"></a>
+`tachogram()`関数は、NNIデータとHRデータが時間的な発生に対してプロットされるタコグラムをプロットします。
 ```python
-# Plot the Tachogram of the ECG signal (interval: 0s to 15s)
+# ECG信号のタコグラムをプロット（間隔：0秒から15秒）
 tools.tachogram(signal, interval=[0, 15])
 ``` 
-The resulting output should look like this:
+結果の出力は次のようになります：
 ![Image](./files/quickstart/tachogram15.png)
 
-### 2.2.4 HRV File Management and HRV Reports <a name="tools_filem"></a>
-The `hrv_export()` files facilitate the process of storing HRV results in an external file. To use this function you must provide the HRV results (here stored in the `hrv_results` ReturnTuple object) and define the absolute file path and file name of the output file.
+### 2.2.4 HRVファイル管理とHRVレポート <a name="tools_filem"></a>
+`hrv_export()`ファイルは、HRV結果を外部ファイルに保存するプロセスを容易にします。この関数を使用するには、HRV結果（ここでは`hrv_results` ReturnTupleオブジェクトに保存）を提供し、出力ファイルの絶対ファイルパスとファイル名を定義する必要があります。
 ```python
-# Export HRV results to a .JSON file named 'efile' stored in 'path' 
+# HRV結果を'path'に保存された'efile'という名前の.JSONファイルにエクスポート
 tools.hrv_export(hrv_results, path='/my/favorite/path/', efile='MyFavoriteHRVResults')
 ```
 
-Use the `hrv_import()` function to import all the results stored in .JSON files generated by the `hrv_results()` function into your Python project. Note, that here the path and file (incl. the '.json' extension) must be provided in a single string.
+`hrv_import()`関数を使用して、`hrv_results()`関数によって生成された.JSONファイルに保存されているすべての結果をPythonプロジェクトにインポートします。ここでは、パスとファイル（'.json'拡張子を含む）を単一の文字列で提供する必要があることに注意してください。
 ```python
-# Import HRV results stored in a .JSON file
+# .JSONファイルに保存されたHRV結果をインポート
 hrv_results = tools.hrv_import('/my/favorite/path/MyFavoriteHRVResults.json')
 ```
 
-The `hrv_report()` file exports HRV results stored in a ReturnTuple object in a report-like .TXT or .CSV file:
+`hrv_report()`ファイルは、ReturnTupleオブジェクトに保存されたHRV結果をレポートのような.TXTまたは.CSVファイルにエクスポートします：
 ```python
-# Generate .TXT report (default file format)
+# .TXTレポートを生成（デフォルトのファイル形式）
 tools.hrv_report(hrv_results, path='/my/favorite/path', rfile='MyFavoriteHRVReport')
 
-# Generate .CSV report
+# .CSVレポートを生成
 tools.hrv_report(hrv_results, path='/my/favorite/path', rfile='MyFavoriteHRVReportInCSV', file_format='csv')
 ```
 
-> NOTE: 
-> The `hrv_export()` and `hrv_report()` come with protection mechanisms to avoid accidentally overwritting files. 
-> For instance, if a file with the file name `'MyFavoriteHRVResults.json'` does already exist, the existing file name will be incremented to the new file name `'MyFavoriteHRVResults_1.json'`.
+> 注意： 
+> `hrv_export()`と`hrv_report()`には、ファイルを誤って上書きしないための保護メカニズムが付いています。
+> 例えば、`'MyFavoriteHRVResults.json'`というファイル名のファイルが既に存在する場合、既存のファイル名は新しいファイル名`'MyFavoriteHRVResults_1.json'`にインクリメントされます。
 
-# 3. Time Domain Module <a name="time"></a>
-## 3.1 Overview <a name="time_overview"></a>
-The `time_domain.py` module contains all the functions to compute the HRV time domain parameters. The invidual parameter level functions are listed in the table below.
+# 3. 時間領域モジュール <a name="time"></a>
+## 3.1 概要 <a name="time_overview"></a>
+`time_domain.py`モジュールには、HRV時間領域パラメータを計算するためのすべての関数が含まれています。個々のパラメータレベルの関数は以下の表に記載されています。
 
-| Function   		    		| Computed Parameters                                  								|
+| 関数   		    		| 計算されるパラメータ                                  								|
 | ---                   		| ---                                                  								|
-| `nn_parameters()`    			| Basic statistical parameters of an NNI series (min, max, mean)   					|
-| `nn_differences_parameter()`	| Basic statistical parameters of an NNI differences series (min, max, mean)		|
-| `hr_parameters()`				| Basic statistical parameters of an HR series (min, max, mean, SD)					|
-| `sdnn()`						| Standard Deviation of Successive NNI (SDNN)										|
-| `sdnn_inex()`					| Mean of the SDNN of 5min segments (SDNN Index)										|
-| `rmssd()`						| Root Mean Square of Successive Differences (RMSSD)								|
-| `sdsd()` 						| Standard Deviation of Successive NNI Differences (SDSD)							|
-| `nnXX()`						| NNX parameter (# of ∆NNI > Xms) and pNNX (% of ∆NNI > Xms)						|
-| `nn50()`						| NN50 parameter (# of ∆NNI > 50ms) and pNN50 (% of ∆NNI > 50ms) 					|
-| `nn20()` 						| NN20 parameter (# of ∆NNI > 20ms) and pNN20 (% of ∆NNI > 20ms) 					|
-| `triangular_index()`			| Triangular index of the NNI histogram (Tri-Index)					|
-| `tinn()` 						| Baseline width of the NNI histogram based on the triangular Interpolation (TINN)		|
-| `geometrical_parameters()`	| Calls `triangular_index()` and `tinn()` functions and returns a single NNI histogram 		|
+| `nn_parameters()`    			| NNIシリーズの基本統計パラメータ（最小、最大、平均）   					|
+| `nn_differences_parameter()`	| NNI差分シリーズの基本統計パラメータ（最小、最大、平均）		|
+| `hr_parameters()`				| HR系列の基本統計パラメータ（最小、最大、平均、SD）					|
+| `sdnn()`						| 連続するNNIの標準偏差（SDNN）										|
+| `sdnn_inex()`					| 5分セグメントのSDNNの平均（SDNNインデックス）										|
+| `rmssd()`						| 連続差の二乗平均平方根（RMSSD）								|
+| `sdsd()` 						| 連続するNNI差分の標準偏差（SDSD）							|
+| `nnXX()`						| NNXパラメータ（∆NNI > Xmsの数）とpNNX（∆NNI > Xmsの割合）						|
+| `nn50()`						| NN50パラメータ（∆NNI > 50msの数）とpNN50（∆NNI > 50msの割合） 					|
+| `nn20()` 						| NN20パラメータ（∆NNI > 20msの数）とpNN20（∆NNI > 20msの割合） 					|
+| `triangular_index()`			| NNIヒストグラムの三角指数（Tri-Index）					|
+| `tinn()` 						| 三角補間に基づくNNIヒストグラムのベースライン幅（TINN）		|
+| `geometrical_parameters()`	| `triangular_index()`と`tinn()`関数を呼び出し、単一のNNIヒストグラムを返す 		|
 
-Additionally, this module contains the module level `time_domain()` function which allows you to compute all the time domain parameters using only a single function (see [3.2.2](time_quick_module)).
+さらに、このモジュールには、1つの関数だけですべての時間領域パラメータを計算できるモジュールレベルの`time_domain()`関数が含まれています（[3.2.2](time_quick_module)を参照）。
 
-| Function   		    		| Computed Parameters                                  								|
+| 関数   		    		| 計算されるパラメータ                                  								|
 | ---                   		| ---                                                  								|
-| `time_domain()`    			| Computes all the time domain parameters listed in the table above				   		|
+| `time_domain()`    			| 上記の表に記載されているすべての時間領域パラメータを計算				   		|
 
-## 3.2 Quickstart <a name="time_quick"></a>
-In order to use this module, it is recommended to import it as follows:
+## 3.2 クイックスタート <a name="time_quick"></a>
+このモジュールを使用するには、以下のようにインポートすることをお勧めします：
 ```python
 import pyhrv.time_domain as td
 ```
 
-### 3.2.1 Compute Individual Time Domain Parameters <a name="time_quick_parameter"></a>
-The functions of the `time_domain.py` module can be used as shown on the example below:
+### 3.2.1 個別の時間領域パラメータの計算 <a name="time_quick_parameter"></a>
+`time_domain.py`モジュールの関数は、以下の例のように使用できます：
 
 ```python
-# Import packages
+# パッケージをインポート
 import numpy as np
 import pyhrv
 import pyhrv.time_domain as td 
 
-# Load NNI sample series
+# NNIサンプルシリーズを読み込み
 nni = pyhrv.utils.load_sample_nni()
 
-# Compute SDNN
+# SDNNを計算
 result = td.sdnn(nni)
 
-# Access SDNN value using the key 'sdnn'
+# キー'sdnn'を使用してSDNN値にアクセス
 print(result['sdnn'])
 ```
 
-### 3.2.2 Compute All Time Domain Parameters at Once <a name="time_quick_module"></a>
-Instead of calling each parameter function individually you can use the module level function `time_domain()` to compute all time domain parameters using only a single function.
+### 3.2.2 すべての時間領域パラメータを一度に計算 <a name="time_quick_module"></a>
+各パラメータ関数を個別に呼び出す代わりに、モジュールレベルの関数`time_domain()`を使用して、1つの関数だけですべての時間領域パラメータを計算できます。
 
 ```python
-# Import packages
+# パッケージをインポート
 import numpy as np
 import pyhrv
 import pyhrv.time_domain as td 
 
-# Load NNI sample series
+# NNIサンプルシリーズを読み込み
 nni = pyhrv.utils.load_sample_nni()
 
-# Compute SDNN
+# SDNNを計算
 results = td.time_domain(nni)
 
-# Access time domain results value using the parameter keys 'sdnn', 'rmssd', 'nn50'
+# パラメータキー'sdnn'、'rmssd'、'nn50'を使用して時間領域の結果値にアクセス
 print(results['sdnn'])
 print(results['rmssd'])
 print(results['nn50'])
-# etc...
+# など...
 ```
 
-# 4. Frequency Domain Module <a name="freq"></a>
-## 4.1 Overview <a name="freq_overview"></a>
-The `frequency_domain.py` module contains functions to compute the HRV frequency domain parameters using different PSD estimation methods: FFT based [Welch's Method](https://en.wikipedia.org/wiki/Welch%27s_method) and [Lomb-Scargle Periodogram](https://en.wikipedia.org/wiki/Least-squares_spectral_analysis).
+# 4. 周波数領域モジュール <a name="freq"></a>
+## 4.1 概要 <a name="freq_overview"></a>
+`frequency_domain.py`モジュールには、異なるPSD推定方法を使用してHRV周波数領域パラメータを計算するための関数が含まれています：FFTベースの[ウェルチ法](https://en.wikipedia.org/wiki/Welch%27s_method)と[ロンブ-スカーグル周期図](https://en.wikipedia.org/wiki/Least-squares_spectral_analysis)。
 
-| Functions   		| Power Spectral Density (PSD) Estimation Methods        							|
+| 関数   		| パワースペクトル密度（PSD）推定方法        							|
 | ---               | ---                                                  								|
-| `welch_psd()`    | PSD estimation using the Welch's Method; computes all frequency domain parameters					|
-| `lomb_psd()`		| PSD estimation using the Lomb-Scargle Periodogram; computes all frequency domain parameters		|
-| `ar_psd()       | PSD estimation using the Autoregressive method; computes all frequency domain parameters |
+| `welch_psd()`    | ウェルチ法を使用したPSD推定；すべての周波数領域パラメータを計算					|
+| `lomb_psd()`		| ロンブ-スカーグル周期図を使用したPSD推定；すべての周波数領域パラメータを計算		|
+| `ar_psd()`       | 自己回帰法を使用したPSD推定；すべての周波数領域パラメータを計算 |
 
-The following parameters are computed from the PSDs:
+PSDから計算される以下のパラメータ：
 
-- Peak frequencies [Hz]
-- Absolute powers [ms^2]
-- Logarithmic powers [ms^2]
-- Relative powers [%]
-- Normalized powers (LF & HF) [-]
-- LF/HF ratio [-]
+- ピーク周波数 [Hz]
+- 絶対パワー [ms^2]
+- 対数パワー [ms^2]
+- 相対パワー [%]
+- 正規化パワー（LFとHF）[-]
+- LF/HF比 [-]
 
-Additionally, this module contains the module level `frequency_domain()` functions which allows you to compute all the frequency domain PSD methods and parameters by using only a single function (see [4.3.2](#freq_quick_module)).
+さらに、このモジュールには、1つの関数だけですべての周波数領域PSD方法とパラメータを計算できるモジュールレベルの`frequency_domain()`関数が含まれています（[4.3.2](#freq_quick_module)を参照）。
 
-| Function     			| Computed Parameters                                  			|
+| 関数     			| 計算されるパラメータ                                  			|
 | ---                	| ---                                         					|
-| `frequency_domain()`  | Computes all the frequency methods and parameters	|
+| `frequency_domain()`  | すべての周波数方法とパラメータを計算	|
 
 
-## 4.2 Quickstart <a name="freq_quick"></a>
-In order to use this module, it is recommended to import it as follows:
+## 4.2 クイックスタート <a name="freq_quick"></a>
+このモジュールを使用するには、以下のようにインポートすることをお勧めします：
 ```python
 import pyhrv.frequency_domain as fd
 ```
 
-### 4.2.1. Welch's Method <a name="freq_welch"></a>
-Use the `welch_psd()` function to compute the PSD from the NNI series using the Welch's method. This function will return the PSD plot and the computed frequency domain parameters from each frequency band.
+### 4.2.1. ウェルチ法 <a name="freq_welch"></a>
+`welch_psd()`関数を使用して、ウェルチ法を使用してNNIシリーズからPSDを計算します。この関数はPSDプロットと各周波数帯域から計算された周波数領域パラメータを返します。
 
-The default frequency bands are specified as follows:
+デフォルトの周波数帯域は以下のように指定されています：
 
-- VLF:	0.00Hz to 0.04Hz
-- LF: 	0.04Hz to 0.15Hz
-- HF: 	0.15Hz to 0.40Hz
+- VLF:	0.00Hz から 0.04Hz
+- LF: 	0.04Hz から 0.15Hz
+- HF: 	0.15Hz から 0.40Hz
 
 ```python
-# Import packages
+# パッケージをインポート
 import numpy as np
 import pyhrv
 import pyhrv.frequency_domain as fd
 
-# Load NNI sample series
+# NNIサンプルシリーズを読み込み
 nni = pyhrv.utils.load_sample_nni()
 
-# Compute the PSD and frequency domain parameters
+# PSDと周波数領域パラメータを計算
 result = fd.welch_psd(nni=nni)
 
-# Access peak frequencies using the key 'fft_peak'
+# キー'fft_peak'を使用してピーク周波数にアクセス
 print(result['fft_peak'])
 ```
 
-The output should look like the following plot:
+出力は以下のようなプロットになります：
 ![Image](./files/quickstart/welch_default.png)
 
-This function allows you to add the ULF band and set custom frequency band limits:
+この関数では、ULF帯域を追加し、カスタム周波数帯域の制限を設定できます：
 ```python
-# Define custom frequency bands
+# カスタム周波数帯域を定義
 fbands = {'ulf': (0.0, 0.1), 'vlf': (0.1, 0.2), 'lf': (0.2, 0.3), 'hf': (0.3, 0.4)}
 
-# Compute the PSD with custom frequency bands
+# カスタム周波数帯域でPSDを計算
 result = fd.welch_psd(nni=nni, fbands=fbands)
 ```
-The output should look like the following plot:
+出力は以下のようなプロットになります：
 ![Image](./files/quickstart/welch_custom.png)
 
-### 4.2.2. Lomb-Scargle Periodogram <a name="freq_lomb"></a>
-Use the `lomb_psd()` function to compute the PSD from the NNI series using the Lomb-Scargle Periodogram. This function will return the PSD plot and the computed frequency domain parameters from each frequency band.
+### 4.2.2. ロンブ-スカーグル周期図 <a name="freq_lomb"></a>
+`lomb_psd()`関数を使用して、ロンブ-スカーグル周期図を使用してNNIシリーズからPSDを計算します。この関数はPSDプロットと各周波数帯域から計算された周波数領域パラメータを返します。
 
-The default frequency bands are specified as follows:
+デフォルトの周波数帯域は以下のように指定されています：
 
-- VLF:	0.00Hz to 0.04Hz
-- LF: 	0.04Hz to 0.15Hz
-- HF: 	0.15Hz to 0.40Hz
+- VLF:	0.00Hz から 0.04Hz
+- LF: 	0.04Hz から 0.15Hz
+- HF: 	0.15Hz から 0.40Hz
 
 ```python
-# Import packages
+# パッケージをインポート
 import numpy as np
 import pyhrv
 import pyhrv.frequency_domain as fd
 
-# Load NNI sample series
+# NNIサンプルシリーズを読み込み
 nni = pyhrv.utils.load_sample_nni()
 
-# Compute the PSD and frequency domain parameters
+# PSDと周波数領域パラメータを計算
 result = fd.lomb_psd(nni=nni)
 
-# Access peak frequencies using the key 'lomb_peak'
+# キー'lomb_peak'を使用してピーク周波数にアクセス
 print(result['lomb_peak'])
 ```
-The output should look like the following plot:
+出力は以下のようなプロットになります：
 ![Image](./files/quickstart/lomb_default.png)
 
-This function allows you to add the ULF band and set custom frequency band limits:
+この関数では、ULF帯域を追加し、カスタム周波数帯域の制限を設定できます：
 ```python
-# Define custom frequency bands
+# カスタム周波数帯域を定義
 fbands = {'ulf': (0.0, 0.1), 'vlf': (0.1, 0.2), 'lf': (0.2, 0.3), 'hf': (0.3, 0.4)}
 
-# Compute the PSD with custom frequency bands
+# カスタム周波数帯域でPSDを計算
 result = fd.lomb_psd(nni=nni, fbands=fbands)
 ```
-The output should look like the following plot:
+出力は以下のようなプロットになります：
 ![Image](./files/quickstart/lomb_custom.png)
 
-### 4.2.3. Autoregressive <a name="freq_ar"></a>
-Use the `ar()` function to compute the PSD from the NNI series using the Autoregressive method. This function will return the PSD plot and the computed frequency domain parameters from each frequency band.
+### 4.2.3. 自己回帰 <a name="freq_ar"></a>
+`ar()`関数を使用して、自己回帰法を使用してNNIシリーズからPSDを計算します。この関数はPSDプロットと各周波数帯域から計算された周波数領域パラメータを返します。
 
-The default frequency bands are specified as follows:
+デフォルトの周波数帯域は以下のように指定されています：
 
-- VLF:  0.00Hz to 0.04Hz
-- LF:   0.04Hz to 0.15Hz
-- HF:   0.15Hz to 0.40Hz
+- VLF:  0.00Hz から 0.04Hz
+- LF:   0.04Hz から 0.15Hz
+- HF:   0.15Hz から 0.40Hz
 
 ```python
-# Import packages
+# パッケージをインポート
 import numpy as np
 import pyhrv
 import pyhrv.frequency_domain as fd
 
-# Load NNI sample series
+# NNIサンプルシリーズを読み込み
 nni = pyhrv.utils.load_sample_nni()
 
-# Compute the PSD and frequency domain parameters
+# PSDと周波数領域パラメータを計算
 result = fd.ar_psd(nni=nni)
 
-# Access peak frequencies using the key 'ar_peak'
+# キー'ar_peak'を使用してピーク周波数にアクセス
 print(result['ar_peak'])
 ```
-The output should look like the following plot:
+出力は以下のようなプロットになります：
 ![Image](./files/quickstart/ar_default.png)
 
-This function allows you to add the ULF band and set custom frequency band limits:
+この関数では、ULF帯域を追加し、カスタム周波数帯域の制限を設定できます：
 ```python
-# Define custom frequency bands
+# カスタム周波数帯域を定義
 fbands = {'ulf': (0.0, 0.1), 'vlf': (0.1, 0.2), 'lf': (0.2, 0.3), 'hf': (0.3, 0.4)}
 
-# Compute the PSD with custom frequency bands
+# カスタム周波数帯域でPSDを計算
 result = fd.ar_psd(nni=nni, fbands=fbands)
 ```
-The output should look like the following plot:
+出力は以下のようなプロットになります：
 ![Image](./files/quickstart/ar_custom.png)
 
-### 4.2.4 Compute All PSD Methods at Once <a name="freq_quick_module"></a>
-Instead of calling each method function individually you can use the module level function `frequency_domain()` to compute all methods and frequency parameters using only a single function.
+### 4.2.4 すべてのPSD手法を一度に計算 <a name="freq_quick_module"></a>
+各メソッド関数を個別に呼び出す代わりに、モジュールレベルの関数`frequency_domain()`を使用して、1つの関数だけですべてのメソッドと周波数パラメータを計算できます。
 
 ```python
-# Import packages
+# パッケージをインポート
 import numpy as np
 import pyhrv
 import pyhrv.frequency_domain as fd 
 
-# Load NNI sample series
+# NNIサンプルシリーズを読み込み
 nni = pyhrv.utils.load_sample_nni()
 
-# Compute frequency 
+# 周波数を計算
 results = fd.frequency_domain(nni=nni)
 
-# Access results computed with the Welch's method, AR and the Lomb-Scargle Periodogram
+# ウェルチ法、ARおよびロンブ-スカーグル周期図で計算された結果にアクセス
 print(results['fft_peak'])
 print(results['lomb_peak'])
 print(results['ar_peak'])
-# etc...
+# など...
 ```
-You can still define  specific parameters for the individual methods when using this function by passing the parameters in method-specific dictionaries as shown below.
+この関数を使用する際に、以下のように方法固有の辞書でパラメータを渡すことで、個々のメソッドの特定のパラメータを定義することもできます。
 
 ```python
-# Import packages
+# パッケージをインポート
 import numpy as np
 import pyhrv
 import pyhrv.frequency_domain as fd 
 
-# Load NNI sample series
+# NNIサンプルシリーズを読み込み
 nni = pyhrv.utils.load_sample_nni()
 
-# Welch parameter(s)
+# ウェルチパラメータ
 kwargs_welch = {'nfft': 2**12}
 
-# AR parameter(s)
+# ARパラメータ
 kwargs_ar = {'nfft': 2**10}
 
-# Lomb parameter(s)
+# ロンブパラメータ
 kwargs_lomb= {'nfft': 2**8}
 
-# Compute frequency 
+# 周波数を計算
 results = fd.frequency_domain(nni=nni, kwargs_welch=kwargs_lomb, kwargs_ar=kwargs_ar, kwargs_lomb=kwargs_lomb)
 
 ``` 
 
-# 5. Nonlinear Module <a name="nonlinear"></a>
-## 5.1 Overview <a name="nonlinear_overview"></a>
-The `nonlinear.py` module contains all the functions to compute nonlinear HRV parameters. The invidiual parameter level functions are listed in the table below.
+# 5. 非線形モジュール <a name="nonlinear"></a>
+## 5.1 概要 <a name="nonlinear_overview"></a>
+`nonlinear.py`モジュールには、非線形HRVパラメータを計算するためのすべての関数が含まれています。個々のパラメータレベルの関数は以下の表に記載されています。
 
-| Function            | Computed Parameters                                               |
+| 関数            | 計算されるパラメータ                                               |
 | ---                 | ---                                                               |
-| `poincare()`        | Poincaré plot, SD1, SD2, SD1/SD2 ratio, area of fitted ellipse    |
-| `sample_entropy()`  | Sample entropy                                                    |
-| `dfa()`             | Short-term and long-term detrended fluctuation analysis           |
+| `poincare()`        | ポアンカレプロット、SD1、SD2、SD1/SD2比、適合楕円の面積    |
+| `sample_entropy()`  | サンプルエントロピー                                                    |
+| `dfa()`             | 短期および長期の傾向変動解析           |
 
-Additionally, this module contains the module level `nonlinear()` function which allows you to compute all nonlinear parameters using only as single function (see [5.2.2](#nonlinear_quick_module))
+さらに、このモジュールには、1つの関数だけですべての非線形パラメータを計算できるモジュールレベルの`nonlinear()`関数が含まれています（[5.2.2](#nonlinear_quick_module)を参照）
 
-| Function      | Computed Parameters                                 |
+| 関数      | 計算されるパラメータ                                 |
 | ---           | ---                                                 |
-| `nonlinear()` | Computes all the nonlinear parameters listed above |
+| `nonlinear()` | 上記のすべての非線形パラメータを計算 |
 
-## 5.2 Quickstart <a name="nonlinear_quick"></a>
-In order to use this module, it is recommended to import it as follows:
+## 5.2 クイックスタート <a name="nonlinear_quick"></a>
+このモジュールを使用するには、以下のようにインポートすることをお勧めします：
 ```python
 import pyhrv.nonlinear as nl
 ```
 
-### 5.2.1 Compute Individual Nonlinear Parameters <a name="nonlinear_quick_parameter"></a>
-The functions of the `nonlinear.py` module can be used as shown on the example below:
+### 5.2.1 個別の非線形パラメータの計算 <a name="nonlinear_quick_parameter"></a>
+`nonlinear.py`モジュールの関数は、以下の例のように使用できます：
 ```python
-# Import packages
+# パッケージをインポート
 import numpy as np
 import pyhrv
 import pyhrv.nonlinear as nl
 
-# Load NNI sample series
+# NNIサンプルシリーズを読み込み
 nni = pyhrv.utils.load_sample_nni()
 
-# Compute SDNN
+# SDNNを計算
 result = nl.poincare(nni)
 
-# Access SD1 value using the key 'sd1'
+# キー'sd1'を使用してSD1値にアクセス
 print(result['sd1'])
 ```
 
-Note that the `poincare()` function generates the [Poincaré scatter plot](https://waset.org/publications/10002615/poincaré-plot-for-heart-rate-variability). The output should look like the following plot:
+`poincare()`関数は[ポアンカレ散布図](https://waset.org/publications/10002615/poincaré-plot-for-heart-rate-variability)を生成することに注意してください。出力は以下のようなプロットになります：
 
 ![Image](./files/quickstart/poincare.png)
 
-For the Detrended Fluctuatio Analysis (DFA) set the defined short-term and long-term intervals to compute the DFAs.
+傾向変動解析（DFA）では、DFAを計算するために定義された短期および長期の間隔を設定します。
 ```python
-# Import packages
+# パッケージをインポート
 import numpy as np
 import pyhrv
 import pyhrv.nonlinear as nl
 
-# Load NNI sample series
+# NNIサンプルシリーズを読み込み
 nni = pyhrv.utils.load_sample_nni()
 
-# Compute SDNN
+# SDNNを計算
 result = nl.dfa(nni, short=[4, 16], long=[17, 64])
 
-# Access the alpha1 (short-term fluctuation) value using the key 'dfa_short'
+# キー'dfa_short'を使用してalpha1（短期変動）値にアクセス
 print(result['dfa_short'])
 ```
-The output should look like the following plot:
+出力は以下のようなプロットになります：
 
 ![Image](./files/quickstart/dfa.png)
 
-### 5.2.2 Compute All Nonlinear Parameters at Once <a name="nonlinear_quick_module"></a>
-Instead of calling each parameter function individually you can use the module level function `nonlinear()` to compute all nonlinear parameters using only a single function.
+### 5.2.2 すべての非線形パラメータを一度に計算 <a name="nonlinear_quick_module"></a>
+各パラメータ関数を個別に呼び出す代わりに、モジュールレベルの関数`nonlinear()`を使用して、1つの関数だけですべての非線形パラメータを計算できます。
 
 ```python
-# Import packages
+# パッケージをインポート
 import numpy as np
 import pyhrv
 import pyhrv.nonlinear as nl 
 
-# Load NNI sample series
+# NNIサンプルシリーズを読み込み
 nni = pyhrv.utils.load_sample_nni()
 
-# Compute all nonlinear parameters
+# すべての非線形パラメータを計算
 results = nl.nonlinear(nni)
 
-# Access results
+# 結果にアクセス
 print(results['sd1'])
 print(results['dfa_short'])
-# etc...
+# など...
 ```
