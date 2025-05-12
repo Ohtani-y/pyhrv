@@ -9,46 +9,45 @@
 ![Downloads](https://img.shields.io/pypi/dm/pyhrv.svg)
 ![License](https://img.shields.io/pypi/l/pyhrv.svg)
 
-pyHRV is an open-source Python toolbox that computes state-of-the-art Heart Rate Variability (HRV) parameters from Electrocardiography (ECG), SpO2, Blood Volume Pulse (BVP), or other signals with heart rate indicators.
+pyHRVは、心電図（ECG）、SpO2、血液量脈波（BVP）、またはその他の心拍数指標を含む信号から最先端の心拍変動（HRV）パラメータを計算するオープンソースのPythonツールボックスです。
 
-With pyHRV, we aim to provide a user-friendly and versatile Python toolbox for HRV dedicated education, research, and application development.
+pyHRVでは、HRV専用の教育、研究、およびアプリケーション開発のためのユーザーフレンドリーで多目的なPythonツールボックスを提供することを目指しています。
 
-It provides provides comprehensible source code to help beginners understand the fundamentals of HRV parameter computation, while providing the most important HRV analysis functionalities for developers and publication-quality plots of the results for researchers.
-# Getting Started
+初心者がHRVパラメータ計算の基礎を理解するのに役立つ理解しやすいソースコードを提供すると同時に、開発者には最も重要なHRV分析機能を提供し、研究者には結果の出版品質のプロットを提供します。
+# はじめに
 
-### Installation & Python Compatibility
-This toolbox can be installed using the ```pip``` tool.
+### インストール & Python互換性
+このツールボックスは`pip`ツールを使用してインストールできます。
 
 ```python
 pip install pyhrv
 ```
-Dependencies: [biosppy](https://github.com/PIA-Group/BioSPPy) | [numpy](http://www.numpy.org) | [scipy](http://scipy.org) | [matplotlib](https://matplotlib.org) | [nolds](https://github.com/CSchoel/nolds) | [spectrum](https://github.com/cokelaer/spectrum)
+依存関係: [biosppy](https://github.com/PIA-Group/BioSPPy) | [numpy](http://www.numpy.org) | [scipy](http://scipy.org) | [matplotlib](https://matplotlib.org) | [nolds](https://github.com/CSchoel/nolds) | [spectrum](https://github.com/cokelaer/spectrum)
 
-pyHRV is primarily maintained in Python 3.X but has been tested under Python 2.7 up to version 0.4.0.
+pyHRVは主にPython 3.Xで維持されていますが、バージョン0.4.0までPython 2.7でもテストされています。
 
 
-### Documentation & Tutorials
-Detailed pyHRV documentation is available on ReadTheDocs:
+### ドキュメント & チュートリアル
+詳細なpyHRVドキュメントはReadTheDocsで利用可能です：
 
-[pyHRV API Reference](https://pyhrv.readthedocs.io)
+[pyHRV APIリファレンス](https://pyhrv.readthedocs.io)
 
-Additional tutorials can be found here:
+追加のチュートリアルはこちらで見つけることができます：
 
-- [pyHRV Quickstart Guide](./pyhrv/README.md)
+- [pyHRV クイックスタートガイド](./pyhrv/README.md)
 
-- [Tutorial: From ECG acquisition to HRV analysis with pyHRV](https://pyhrv.readthedocs.io/en/latest/_pages/tutorials/bitalino.html)
+- [チュートリアル: ECG取得からpyHRVによるHRV分析まで](https://pyhrv.readthedocs.io/en/latest/_pages/tutorials/bitalino.html)
 
-- [Tutorial: Bulk processing with pyHRV](https://pyhrv.readthedocs.io/en/latest/_pages/tutorials/bulk.html)
+- [チュートリアル: pyHRVによる一括処理](https://pyhrv.readthedocs.io/en/latest/_pages/tutorials/bulk.html)
 
-### Scientific Background
-The HRV algorithms have been developed and implemented according to the [Heart Rate Variability - Sandards of 
-Measurement, Physiological Interpretation, and Clinical Use Guidelines](https://www.ahajournals.org/doi/full/10.1161/01.CIR.93.5.1043). Other references are noted in the code and in the [pyHRV references](./pyhrv/files/references.txt).
+### 科学的背景
+HRVアルゴリズムは、[心拍変動 - 測定基準、生理学的解釈、および臨床使用ガイドライン](https://www.ahajournals.org/doi/full/10.1161/01.CIR.93.5.1043)に従って開発および実装されています。その他の参考文献はコード内および[pyHRVリファレンス](./pyhrv/files/references.txt)に記載されています。
 
-### Citing pyHRV
-Please use the following conference paper to cite pyHRV in your work ([Conference Paper [PDF]](https://drive.google.com/open?id=1enItjdVXkTYX_h2DkgDl2v8vXAe09QJv), [Conference Proceedings [PDF]](https://etran.rs/2019/Proceedings_IcETRAN_ETRAN_2019.pdf)):
+### pyHRVの引用
+あなたの研究でpyHRVを引用する場合は、以下の会議論文を使用してください（[会議論文 [PDF]](https://drive.google.com/open?id=1enItjdVXkTYX_h2DkgDl2v8vXAe09QJv)、[会議プロシーディングス [PDF]](https://etran.rs/2019/Proceedings_IcETRAN_ETRAN_2019.pdf)）：
 
-*P. Gomes, P. Margaritoff, and H. P. da Silva, “pyHRV: Development and evaluation of an open-source python toolbox for
- heart rate variability (HRV),” in Proc. Int’l Conf. on Electrical, Electronic and Computing Engineering (IcETRAN), pp. 822-828, 2019*
+*P. Gomes, P. Margaritoff, and H. P. da Silva, "pyHRV: Development and evaluation of an open-source python toolbox for
+ heart rate variability (HRV)," in Proc. Int'l Conf. on Electrical, Electronic and Computing Engineering (IcETRAN), pp. 822-828, 2019*
 
 ```latex
 @inproceedings{Gomes2019,
@@ -60,93 +59,89 @@ Please use the following conference paper to cite pyHRV in your work ([Conferenc
 }
 ```
 
-# pyHRV Core Features & HRV Parameter List
+# pyHRVの主な機能 & HRVパラメータリスト
 
-With pyHRV, you can compute up to 78 HRV parameters while using other useful non-parameter-specific tools to support 
-your HRV research.
+pyHRVを使用すると、最大78のHRVパラメータを計算しながら、HRV研究をサポートするための他の有用なパラメータ固有でないツールを使用できます。
 
-### Time Domain Parameters
+### 時間領域パラメータ
 
-- Basic statistical parameters of a NNI series - ```pyhrv.time_domain.nni_parameters()``` 
-- Basic statistical parameters of a ΔNNI series - ```pyhrv.time_domain.nni_differences_parameters()```
-- Basic statistical parameters of a Heart Rate (HR) series - ```pyhrv.time_domain.hr_parameters()``` 
-- Standard deviation of a NNI series (SDNN) - ```pyhrv.time_domain.sdnn()``` 
-- Mean of the SDNN of 5 successive 5 minute segments extracted from long-term NNI series (SDNN<sub>index</sub>)- ```pyhrv.time_domain.sdnn_index()``` 
-- Standard deviation of the mean of 5 minute segments extracted from long-term NNI series (SDANN) - ```pyhrv.time_domain.sdann()``` 
-- Root mean square of successive difference (RMSSD) - ```pyhrv.time_domain.rmssd()``` 
-- Standard deviation of successive differences (SDSD) - ```pyhrv.time_domain.sdsd()``` 
-- NNx & pNNx parameters - ```pyhrv.time_domain.nnXX()``` 
-- NN20 & pNN20 parameters - ```pyhrv.time_domain.nn20()``` 
-- NN50 & pNN50 parameters - ```pyhrv.time_domain.nn50()``` 
-- Triangular Index (Maximum of the Histogram / Width of the Histogram) - ```pyhrv.time_domain.triangular_index()``` 
-- Triangular Interpolation Function (TINN)<sup>1</sup> - ```pyhrv.time_domain.tinn()```
+- NNI系列の基本統計パラメータ - ```pyhrv.time_domain.nni_parameters()``` 
+- ΔNNI系列の基本統計パラメータ - ```pyhrv.time_domain.nni_differences_parameters()```
+- 心拍数（HR）系列の基本統計パラメータ - ```pyhrv.time_domain.hr_parameters()``` 
+- NNI系列の標準偏差（SDNN） - ```pyhrv.time_domain.sdnn()``` 
+- 長期NNI系列から抽出された連続する5つの5分セグメントのSDNNの平均（SDNN<sub>index</sub>）- ```pyhrv.time_domain.sdnn_index()``` 
+- 長期NNI系列から抽出された5分セグメントの平均の標準偏差（SDANN） - ```pyhrv.time_domain.sdann()``` 
+- 連続差の二乗平均平方根（RMSSD） - ```pyhrv.time_domain.rmssd()``` 
+- 連続差の標準偏差（SDSD） - ```pyhrv.time_domain.sdsd()``` 
+- NNx & pNNxパラメータ - ```pyhrv.time_domain.nnXX()``` 
+- NN20 & pNN20パラメータ - ```pyhrv.time_domain.nn20()``` 
+- NN50 & pNN50パラメータ - ```pyhrv.time_domain.nn50()``` 
+- 三角指数（ヒストグラムの最大値 / ヒストグラムの幅） - ```pyhrv.time_domain.triangular_index()``` 
+- 三角補間関数（TINN）<sup>1</sup> - ```pyhrv.time_domain.tinn()```
 
-<sup><sup>1</sup> the current version of pyHRV has some bug which causes misleading and false results for the TINN 
-function. [An issue has already been opened for this purpose...](https://github.com/PGomes92/pyhrv/issues/5)
+<sup><sup>1</sup> pyHRVの現在のバージョンには、TINN関数に対して誤解を招く誤った結果を引き起こすバグがあります。[この目的のために既に問題が開かれています...](https://github.com/PGomes92/pyhrv/issues/5)
 
 ![Image](./SampleFigures/SampleHistogram.png)
 
 
-### Frequency Domain Parameters
-Computes the following Frequency Domain parameters from the Power Spectral Density (PSD) of a NNI series computed 
-using the following PSD methods:
+### 周波数領域パラメータ
+以下のPSD方法を使用して計算されたNNI系列のパワースペクトル密度（PSD）から以下の周波数領域パラメータを計算します：
 
-- Welch's Method - ```pyhrv.frequency_domain.welch_psd()```
-- Autoregressive - ```pyhrv.frequency_domain.ar_psd()```
-- Lomb-Scargle - ```pyhrv.frequency_domain.lomb_psd()```
+- ウェルチ法 - ```pyhrv.frequency_domain.welch_psd()```
+- 自己回帰 - ```pyhrv.frequency_domain.ar_psd()```
+- ロンブ-スカーグル - ```pyhrv.frequency_domain.lomb_psd()```
 
-Frequency parameters:
-- Peak Frequencies
-- Absolute Powers
-- Logarithmic Powers
-- Relative Powers
-- Normalized Powers (LF and HF only)
-- LF/HF ratio
+周波数パラメータ：
+- ピーク周波数
+- 絶対パワー
+- 対数パワー
+- 相対パワー
+- 正規化パワー（LFとHFのみ）
+- LF/HF比
 
-The parameters are computed for the Very Low Frequency (VLF), Low Frequency (LF), and High Frequency (HF) bands. The 
-Frequency Bands can be customized, including an Ultra Low Frequency (ULF) band.
+パラメータは超低周波（VLF）、低周波（LF）、および高周波（HF）帯域に対して計算されます。周波数帯域はカスタマイズ可能で、超超低周波（ULF）帯域を含めることもできます。
 
-Sample plots of the resulting PSD plots and Frequency Domain parameters using pyHRV can be seen below:
+pyHRVを使用した結果のPSDプロットと周波数領域パラメータのサンプルプロットは以下のとおりです：
 
 ![Image](./SampleFigures/SampleWelch.png)
 ![Image](./SampleFigures/SampleAR.png)
 ![Image](./SampleFigures/SampleLomb.png)
 
-#### PSD Comparison Features - 2D Comparison Plot
-Plot PSDs from multiple NNI segments extracted from a NNI series (e.g. 5 minute segments of a 60 minute recording) in a 3D Waterfall Plot using the Welch, Autoregressive or Lomb-Scargle method and compute the Frequency Domain parameters from each segment - ```pyhrv.frequency_domain.psd_comparison()``` [[source](https://github.com/PGomes92/pyhrv/blob/b5c5baaa8bf1ad085dc2dfe46b477171fe153682/pyhrv/frequency_domain.py#L970)].
+#### PSD比較機能 - 2D比較プロット
+ウェルチ、自己回帰、またはロンブ-スカーグル法を使用して、NNI系列から抽出された複数のNNIセグメント（例：60分の記録の5分セグメント）のPSDを3D滝プロットでプロットし、各セグメントから周波数領域パラメータを計算します - ```pyhrv.frequency_domain.psd_comparison()``` [[ソース](https://github.com/PGomes92/pyhrv/blob/b5c5baaa8bf1ad085dc2dfe46b477171fe153682/pyhrv/frequency_domain.py#L970)]。
 
 ![Image](./SampleFigures/SamplePSDComparisonWelch.png)
 ![Image](./SampleFigures/SamplePSDComparisonAR.png)
 ![Image](./SampleFigures/SamplePSDComparisonLomb.png)
 
-#### PSD Comparison Features - 3D Waterfall Plot
-Plot PSDs from multiple NNI segments extracted from a NNI series (e.g. 5 minute segments of a 60 minute recording) in a single plot using the Welch, Autoregressive or Lomb-Scargle method and compute the Frequency Domain parameters from each segment - ```pyhrv.frequency_domain.psd_waterfall()```
+#### PSD比較機能 - 3D滝プロット
+ウェルチ、自己回帰、またはロンブ-スカーグル法を使用して、NNI系列から抽出された複数のNNIセグメント（例：60分の記録の5分セグメント）のPSDを単一のプロットでプロットし、各セグメントから周波数領域パラメータを計算します - ```pyhrv.frequency_domain.psd_waterfall()```
 
 ![Image](./SampleFigures/SamplePSDWaterfallWelch.png)
 ![Image](./SampleFigures/SamplePSDWaterfallAR.png)
 ![Image](./SampleFigures/SamplePSDWaterfallLomb.png)
 
-## Nonlinear Parameters
-Computes the following Nonlinear Parameters and the respective plots:
+## 非線形パラメータ
+以下の非線形パラメータとそれぞれのプロットを計算します：
 
-- Poincaré Plot (SD1, SD2, fittes ellipse area, SD2/SD1 ratio) - ```pyhrv.nonlinear.poincare()```
-- Sample Entropy - ```pyhrv.nonlinear.sample_entropy()```
-- Detrended Fluctuation Analysis (short-term and long-term)- ```pyhrv.nonlinear.dfa()```
+- ポアンカレプロット（SD1、SD2、楕円面積、SD2/SD1比） - ```pyhrv.nonlinear.poincare()```
+- サンプルエントロピー - ```pyhrv.nonlinear.sample_entropy()```
+- 傾向変動解析（短期および長期）- ```pyhrv.nonlinear.dfa()```
 
 ![Image](./SampleFigures/SampleNonlinear.png)
 
 
-## HRV Support Tools & Other Features
+## HRVサポートツール & その他の機能
 
-- Computation of NNI series - ```pyhrv.tools.nn_intervals()``` 
-- Computation of ∆NNI series - ```pyhrv.tools.nn_diff()```
-- Computation of HR series - ```pyhrv.tools.heart_rate()``` 
-- ECG plotting on medical-grade-like ECG paper layout - ```pyhrv.tools.plot_ecg()``` 
-- NNI Tachogram plotting - ```pyhrv.tools.tachogram()```
-- Heart Rate Heatplot, a visualization & classification of HR performance based on normal HR ranges by age and gender- ```pyhrv.tools.heart_rate_heatplot()```
-- Time varying plot of a HRV parameter over time - ```pyhrv.tools.time_varying()```
-- Dynamic Radar chart of HRV parameters - ```pyhrv.tools.radar_chart()```
-- Exporting HRV results into a JSON file [Sample File](./pyhrv/files/SampleExport.json)- ```pyhrv.tools.hrv_export()``` 
+- NNI系列の計算 - ```pyhrv.tools.nn_intervals()``` 
+- ∆NNI系列の計算 - ```pyhrv.tools.nn_diff()```
+- HR系列の計算 - ```pyhrv.tools.heart_rate()``` 
+- 医療グレードのようなECGペーパーレイアウトでのECGプロット - ```pyhrv.tools.plot_ecg()``` 
+- NNIタコグラムプロット - ```pyhrv.tools.tachogram()```
+- 心拍数ヒートプロット、年齢と性別による正常な心拍数範囲に基づく心拍数パフォーマンスの視覚化と分類 - ```pyhrv.tools.heart_rate_heatplot()```
+- 時間経過に伴うHRVパラメータの時間変化プロット - ```pyhrv.tools.time_varying()```
+- HRVパラメータの動的レーダーチャート - ```pyhrv.tools.radar_chart()```
+- HRV結果をJSONファイルにエクスポート [サンプルファイル](./pyhrv/files/SampleExport.json) - ```pyhrv.tools.hrv_export()``` 
 
 ![Image](./SampleFigures/SampleECG.png)
 ![Image](./SampleFigures/SampleTachogram.png)
@@ -154,24 +149,23 @@ Computes the following Nonlinear Parameters and the respective plots:
 ![Image](./SampleFigures/SampleRadarChart5.png)
 ![Image](./SampleFigures/SampleRadarChart8.png)
 
-## HRV Reports
-Generate HRV reports in .TXT, .CSV, and .PDF format (new in v.0.4!). Read the [README](./pyhrv/report/README.md) file of the pyHRV report submodule for more information about how to generate pyHRV reports as the following:
+## HRVレポート
+.TXT、.CSV、および.PDF形式のHRVレポートを生成します（v.0.4で新登場！）。以下のようなpyHRVレポートを生成する方法の詳細については、pyHRVレポートサブモジュールの[README](./pyhrv/report/README.md)ファイルをお読みください：
 
-- [pyHRV .TXT report](./pyhrv/files/SampleReport.txt)
-- [pyHRV .CSV report](./pyhrv/files/SampleReport.csv)
-- [pyHRV .PDF report](./pyhrv/files/SampleReport.pdf)
+- [pyHRV .TXTレポート](./pyhrv/files/SampleReport.txt)
+- [pyHRV .CSVレポート](./pyhrv/files/SampleReport.csv)
+- [pyHRV .PDFレポート](./pyhrv/files/SampleReport.pdf)
 
 
-## Utilities
-Several non-HRV specific utilities and general purpose functions which are used throughout this toolbox:
-- Loading NNI sample series for testing purposes - ```pyhrv.utils.load_sample_nni()```
-- Loading pyHRV's [hrv_keys.json](./pyhrv/files/hrv_keys.json) file - ```pyhrv.utils.load_hrv_keys_json()```
-- Format NNI series (ensure numpy array and convert data provided in seconds to ms - ```pyhrv.utils.nn_format()```
-- Segmentation of time series (e.g. NNI series) - ```pyhrv.utils.segmentation()```
-- and others...
+## ユーティリティ
+このツールボックス全体で使用されるいくつかのHRV固有でないユーティリティと一般的な目的の関数：
+- テスト目的のためのNNIサンプルシリーズの読み込み - ```pyhrv.utils.load_sample_nni()```
+- pyHRVの[hrv_keys.json](./pyhrv/files/hrv_keys.json)ファイルの読み込み - ```pyhrv.utils.load_hrv_keys_json()```
+- NNI系列のフォーマット（numpy配列を確保し、秒単位で提供されたデータをmsに変換） - ```pyhrv.utils.nn_format()```
+- 時系列（例：NNI系列）のセグメント化 - ```pyhrv.utils.segmentation()```
+- その他...
 
-# Disclaimer
-This program is distributed in the hope it will be useful and provided to you "as is", but WITHOUT ANY WARRANTY, without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. This program is NOT intended for medical diagnosis. We expressly disclaim any liability whatsoever for any direct, indirect, consequential, incidental or special damages, including, without limitation, lost revenues, lost profits, losses resulting from business interruption or loss of data, regardless of the form of action or legal theory under which the liability may be asserted, even if advised of the possibility of such damages.
+# 免責事項
+このプログラムは、有用であることを願って配布され、「現状のまま」提供されますが、商品性または特定目的への適合性の黙示的保証を含め、いかなる保証もなく提供されます。このプログラムは医学的診断を目的としたものではありません。直接的、間接的、結果的、偶発的、または特別な損害、収益の損失、利益の損失、事業中断または情報の損失による損害について、訴訟の形式または法的理論にかかわらず、そのような損害の可能性について知らされていたとしても、明示的に一切の責任を負いません。
 
-This package has initially (up to version 0.3) been developed within the scope of my master thesis _"Development of an 
-Open-Source Python Toolbox for Heart Rate Variability (HRV)"_ at the [University of Applied Sciences Hamburg, Germany (Faculty Life Sciences, Department of Biomedical Engineering)](https://www.haw-hamburg.de/fakultaeten-und-departments/ls/studium-und-lehre/master-studiengaenge/mbme.html) and [PLUX wireless biosignals, S.A.](http://www.plux.info), Lisbon, Portugal.
+このパッケージは当初（バージョン0.3まで）、[ハンブルク応用科学大学、ドイツ（生命科学部、生物医学工学科）](https://www.haw-hamburg.de/fakultaeten-und-departments/ls/studium-und-lehre/master-studiengaenge/mbme.html)と[PLUX wireless biosignals, S.A.](http://www.plux.info)、リスボン、ポルトガルでの修士論文「心拍変動（HRV）のためのオープンソースPythonツールボックスの開発」の範囲内で開発されました。

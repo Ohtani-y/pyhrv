@@ -1,46 +1,46 @@
-# pyHRV Reports
+# pyHRVレポート
 
-pyHRV comes with built-in features to create reports from the computed HRV results in .TXT, .CSV. and .PDF format (new in v.0.4). Find below more information about the different output formats.
+pyHRVには、計算されたHRV結果から.TXT、.CSV、および.PDF形式（v.0.4で新登場）のレポートを作成するための組み込み機能が付属しています。以下に、異なる出力形式に関する詳細情報を示します。
 
-## .TXT Report
-Follow the code example below to generate a .TXT report. An example report can be found here. [Click here for an example TXT report](../files/SampleReport.txt)
+## .TXTレポート
+.TXTレポートを生成するには、以下のコード例に従ってください。サンプルレポートはこちらで確認できます。[TXTレポートの例はこちら](../files/SampleReport.txt)
 
 ```python
-    # Imports
+    # インポート
     import pyhrv
 
-    # Load 5 minute sample NNI series
+    # 5分間のサンプルNNIシリーズを読み込み
     nni = pyhrv.utils.load_sample_nni()
 
-    # Compute HRV parameters (& hide
+    # HRVパラメータを計算（表示しない）
     results = pyhrv.hrv(nni, show=False)
 
-    # Create HRV TXT report
+    # HRV TXTレポートを作成
     pyhrv.report.hrv_report(results, path='./files/', rfile='SampleReport', file_format='txt')
 ```
 
-## .CSV Report
-Follow the code example below to generate a .CSV report. An example report can be found here. [Click here for an example CSV report](../files/SampleReport.csv)
+## .CSVレポート
+.CSVレポートを生成するには、以下のコード例に従ってください。サンプルレポートはこちらで確認できます。[CSVレポートの例はこちら](../files/SampleReport.csv)
 
 ```python
-    # Imports
+    # インポート
     import pyhrv
 
-    # Load 5 minute sample NNI series
+    # 5分間のサンプルNNIシリーズを読み込み
     nni = pyhrv.utils.load_sample_nni()
 
-    # Compute HRV parameters (& hide
+    # HRVパラメータを計算（表示しない）
     results = pyhrv.hrv(nni, show=False)
 
-    # Create HRV CSV report
+    # HRV CSVレポートを作成
     pyhrv.report.hrv_report(results, path='./files/', rfile='SampleReport', file_format='csv')
 ```
 
-## .PDF Report
-#### Requirements & Dependencies
-The pyHRV PDF report generator is a LaTex powered feature which allows you generate high-quality reports in PDF format. [Click here for an example PDF report](../files/SampleReport.pdf).
+## .PDFレポート
+#### 要件と依存関係
+pyHRV PDFレポートジェネレータは、PDF形式の高品質なレポートを生成できるLaTeXを活用した機能です。[PDFレポートの例はこちら](../files/SampleReport.pdf)。
 
-A LaTex distribution is required to be installed on your computer along with the following LaTeX packages in order for this feature to be used:
+この機能を使用するには、コンピュータに以下のLaTeXパッケージと共にLaTeX配布物がインストールされている必要があります：
 
 * amsmath
 * array
@@ -56,41 +56,41 @@ A LaTex distribution is required to be installed on your computer along with the
 * tikz
 * xcolor
 
-Visit the [The LaTeX Project Website](https://www.latex-project.org/get/) to download a LaTex distribution for your operating system and for more information about how to install the required packages.
+お使いのオペレーティングシステム用のLaTeX配布物をダウンロードし、必要なパッケージのインストール方法についての詳細は、[LaTeXプロジェクトウェブサイト](https://www.latex-project.org/get/)をご覧ください。
 
-#### Creating a PDF report
-See the following example demonstrating how to compute the HRV parameters and to generate a PDF report.
+#### PDFレポートの作成
+HRVパラメータを計算してPDFレポートを生成する方法を示す以下の例をご覧ください。
 
 ```python
-    # Imports
+    # インポート
     import pyhrv
 
-    # Load 5 minute sample NNI series
+    # 5分間のサンプルNNIシリーズを読み込み
     nni = pyhrv.utils.load_sample_nni()
 
-    # Compute HRV parameters (& hide
+    # HRVパラメータを計算（表示しない）
     results = pyhrv.hrv(nni, show=False)
 
-    # Step 1: Create a PDFReport object and pass the ECG signal, NNI, or R-Peaks series and the results
+    # ステップ1：PDFReportオブジェクトを作成し、ECG信号、NNI、またはR-Peaksシリーズと結果を渡す
     report = pyhrv.report.PDFReport(nni=nni, results=results)
 
-    # Step 2: Set general information about the acquisition
+    # ステップ2：取得に関する一般情報を設定
     report.set_general_info(subject='Jon Doe',
                             experiment='Sample Report',
                             age=27,
                             gender='male',
                             comment='This is a sample comment in a sample report')
 
-    # Step 3: Create the PDF report
+    # ステップ3：PDFレポートを作成
     report.create_report(terminal_output=True)
 ```
 
-#### Create your own PDF report template
-The LaTeX template files for the PDF report are available in th the [pyhrv/report/templates](./templates) folder. Open these files in the LaTeX Editor of your preference to create your own report template. 
+#### 独自のPDFレポートテンプレートの作成
+PDFレポート用のLaTeXテンプレートファイルは[pyhrv/report/templates](./templates)フォルダにあります。お好みのLaTeXエディタでこれらのファイルを開いて、独自のレポートテンプレートを作成してください。
 
-Note that the HRV results are stored as new commends in the [parameters.tex](parameters.tex) file which are then used throughout the report template. It is recommended to change only the template while leaving the parameters.tex file as is.
+HRV結果は[parameters.tex](parameters.tex)ファイルに新しいコマンドとして保存され、レポートテンプレート全体で使用されることに注意してください。テンプレートのみを変更し、parameters.texファイルはそのままにしておくことをお勧めします。
 
-If possible, help pyHRV grow by leaving a reference on your custom reports. For this, use either the citation format suggested on this [repositories' main README](https://github.com/PGomes92/pyhrv) or add a note to the footer with the repositories URL:
+可能であれば、カスタムレポートに参照を残してpyHRVの成長を支援してください。そのためには、この[リポジトリのメインREADME](https://github.com/PGomes92/pyhrv)で提案されている引用形式を使用するか、リポジトリのURLをフッターに注記として追加してください：
 
 ```latex
    \lfoot{HRV results \& report generated with pyHRV (v.\version)\\\url{https://github.com/PGomes92/pyhrv}}
