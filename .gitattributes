@@ -1,0 +1,15 @@
+# Set language for documentation files
+*.md linguist-language=Japanese
+*.md.ja linguist-language=Japanese
+*.rst linguist-language=Japanese
+
+# Treat .ja files as documentation
+*.ja linguist-documentation=true
+*.ja linguist-detectable=true
+
+# Explicitly mark Japanese files
+README.md.ja linguist-language=Japanese
+changelog.md.ja linguist-language=Japanese
+publications.md.ja linguist-language=Japanese
+pyhrv/README.md.ja linguist-language=Japanese
+pyhrv/report/README.md.ja linguist-language=Japanese
